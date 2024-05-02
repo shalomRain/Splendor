@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>璀璨宝石</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" />
+    <!-- <link ref="stylesheet" type="text/css" href="./card.css" /> -->
+    <link rel="stylesheet" href="./css/build-1c6b4751da.min.css">
+
+    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+  </head>
+  <body>
+    <div class="splendor-game">
+      <div class="chessboard">
+        <!-- 标记 -->
+        <div id="marker-01" class="markers framesite"></div>
+        <div id="marker-02" class="markers framesite"></div>
+        <div id="marker-03" class="markers framesite"></div>
+        <div id="marker-04" class="markers framesite"></div>
+        <div id="marker-05" class="markers ruby"></div>
+        <div id="marker-06" class="markers ruby"></div>
+        <div id="marker-07" class="markers ruby"></div>
+        <div id="marker-08" class="markers ruby"></div>
+        <div id="marker-09" class="markers sapphire"></div>
+        <div id="marker-10" class="markers sapphire"></div>
+        <div id="marker-11" class="markers sapphire"></div>
+        <div id="marker-12" class="markers sapphire"></div>
+        <div id="marker-13" class="markers emerald"></div>
+        <div id="marker-14" class="markers emerald"></div>
+        <div id="marker-15" class="markers emerald"></div>
+        <div id="marker-16" class="markers emerald"></div>
+        <div id="marker-17" class="markers diamond"></div>
+        <div id="marker-18" class="markers diamond"></div>
+        <div id="marker-19" class="markers diamond"></div>
+        <div id="marker-20" class="markers diamond"></div>
+        <div id="marker-21" class="markers gold"></div>
+        <div id="marker-22" class="markers gold"></div>
+        <div id="marker-23" class="markers gold"></div>
+        <div id="marker-24" class="markers pearl"></div>
+        <div id="marker-25" class="markers pearl"></div>
+        <div id="cell-25" data-position="1-1" class="cell arrow up"></div>
+        <div id="cell-10" data-position="1-2" class="cell arrow right"></div>
+        <div id="cell-11" data-position="1-3" class="cell arrow right"></div>
+        <div id="cell-12" data-position="1-4" class="cell arrow right"></div>
+        <div id="cell-13" data-position="1-5" class="cell arrow down"></div>
+
+        <div id="cell-24" data-position="2-1" class="cell arrow up"></div>
+        <div id="cell-09" data-position="2-2" class="cell arrow up"></div>
+        <div id="cell-02" data-position="2-3" class="cell arrow right"></div>
+        <div id="cell-03" data-position="2-4" class="cell arrow down"></div>
+        <div id="cell-14" data-position="2-5" class="cell arrow down"></div>
+
+        <div id="cell-23" data-position="3-1" class="cell arrow up"></div>
+        <div id="cell-08" data-position="3-2" class="cell arrow up"></div>
+        <div id="cell-01" data-position="3-3" class="cell arrow up"></div>
+        <div id="cell-04" data-position="3-4" class="cell arrow down"></div>
+        <div id="cell-15" data-position="3-5" class="cell arrow down"></div>
+
+        <div id="cell-22" data-position="4-1" class="cell arrow up"></div>
+        <div id="cell-07" data-position="4-2" class="cell arrow up"></div>
+        <div id="cell-06" data-position="4-3" class="cell arrow left"></div>
+        <div id="cell-05" data-position="4-4" class="cell arrow left"></div>
+        <div id="cell-16" data-position="4-5" class="cell arrow down"></div>
+
+        <div id="cell-21" data-position="5-1" class="cell arrow up"></div>
+        <div id="cell-20" data-position="5-2" class="cell arrow left"></div>
+        <div id="cell-19" data-position="5-3" class="cell arrow left"></div>
+        <div id="cell-18" data-position="5-4" class="cell arrow left"></div>
+        <div id="cell-17" data-position="5-5" class="cell arrow left"></div>
+      </div>
+      <div id="cards-container">
+        <div id="third-cards" class="row-cards">
+          <div class="hidden-cards"></div>
+          <div class="show-cards"></div>
+        </div>
+        <div id="second-cards" class="row-cards"></div>
+        <div id="first-cards" class="row-cards"></div>
+      </div>
+      <div class="action">
+        <div class="optional-action">
+          <div class="title">
+            <span class="play-name">玩家1</span>可选行动
+          </div>
+          <div class="content">
+            <div class="optional-item" data-action="reserve">
+              <button class="optional-text opt-privilege">使用特权</button>
+            </div>
+            <div class="optional-item" data-action="buy">
+              <button class="optional-text opt-fill">补充棋盘(剩余宝石数：0)</button>
+            </div>
+          </div>
+          <button class="opt jump optional-text">跳过可选行动</button>
+        </div>
+        <div class="coercion-action">
+          <div class="title">
+            <span class="play-name">玩家1</span>强制行动
+          </div>
+          <div class="content">
+            <div class="coercion-item">
+              <button class="action-text pick-gem">拿取宝石</button>
+              <button class="action-text pick-gem-confirm">确认</button>
+              <button class="action-text pick-gem-cancel">取消</button>
+            </div>
+            <div class="coercion-item">
+              <button class="action-text pre-card">预购卡牌</button>
+              <button class="action-text pre-card-confirm">确认</button>
+              <button class="action-text pre-card-cancel">取消</button>
+            </div>
+            <div class="coercion-item">
+              <button class="action-text buy-card">购买</button>
+              <button class="action-text buy-card-confirm">确认</button>
+              <button class="action-text buy-card-cancel">取消</button>
+            </div>
+          </div>
+          <button class="opt last optional-text">返回可选行动</button>
+        </div>
+        <div class="abandon-action">
+          <div class="title">
+            <span class="play-name">玩家1</span>丢弃宝石
+          </div>
+          <div class="content">
+            <div class="abandon-item diamond">0</div>
+            <div class="abandon-item sapphire">0</div>
+            <div class="abandon-item emerald">0</div>
+            <div class="abandon-item ruby">0</div>
+            <div class="abandon-item framesite">0</div>
+            <div class="abandon-item pearl">0</div>
+            <div class="abandon-item gold">0</div>
+          </div>
+          <div class="opt">
+            <div class="action-text abandon-confirm">确认</div>
+            <div class="action-text abandon-reset">重置</div>
+          </div>
+        </div>
+      </div>
+      <div class="game-players"></div>
+    </div>
+    <!-- 贵族特权抽屉 -->
+    <div class="drawer-container">
+      <div class="drawer-content">
+        <div id="privilege-container"></div>
+        <div id="royal-cards"></div>
+      </div>
+    </div>
+    <div class="drawer-btn"></div>
+    <!-- 规则抽屉 -->
+    <div class="rule-intro">
+      <div class="title">新手指引</div>
+      <div class="chessboard-intro content">棋盘及宝石</div>
+      <div class="card-intro content">卡牌</div>
+      <div class="player-intro content">玩家</div>
+      <div class="action-intro content">行动</div>
+      <div class="royal-intro content">贵族卡牌</div>
+    </div>
+
+    <!-- 提示 -->
+    <div class="tips"></div>
+    <!-- 游戏结束 -->
+    <div class="game-over"></div>
+  </body>
+  <!-- 将每个cell 按照 上右下左的顺序移动一个单元格 一共复制25次 最终构成一个5*5的元素图 -->
+  <!-- TODO5 通过爬虫去获取数据 -->
+
+  <script src="./js/build-92d16a2be7.min.js"></script>
+</html>
